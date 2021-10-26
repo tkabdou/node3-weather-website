@@ -8,7 +8,14 @@ const forecast = (latitude, longitude, callback) => {
         } else if (body.error) {
             callback('Unable to find location. Try another search!', undefined)
         } else {
-            callback(undefined, body.current.weather_descriptions[0]  + '. It is currently ' + body.current.temperature + ' degrees out.  It feels like ' + body.current.feelslike + ' degrees out.')
+            var forecastMessage = body.current.weather_descriptions[0]  + '. It is currently '
+            forecastMessage = forecastMessage + body.current.temperature + ' degrees out.  It feels like '
+            forecastMessage = forecastMessage + body.current.feelslike + ' degrees out.'
+            forecastMessage = forecastMessage + '  Humidity is ' + body.current.humidity + "."
+            forecastMessage = forecastMessage + '  Visibity is ' + body.current.visibility + "."
+            
+            callback(undefined, forecastMessage)
+            // callback(undefined, body.current.weather_descriptions[0]  + '. It is currently ' + body.current.temperature + ' degrees out.  It feels like ' + body.current.feelslike + ' degrees out.')
         }
     })
 }
